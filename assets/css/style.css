@@ -162,3 +162,8 @@ img {
 .divisao {
   border: solid 2px #000;
 }
+
+.logo-branco {
+  padding-bottom: 1rem;
+  width: 70%;
+}

@@ -39,6 +39,10 @@ body.depois-sorteio .container-img {
   display: flex;
 }
 
+body.depois-sorteio .logo-branco {
+  display: none;
+}
+
 body {
   align-items: center;
   justify-content: center;

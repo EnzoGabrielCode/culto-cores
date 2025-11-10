@@ -1,0 +1,24 @@
+{
+  "name": "culto-cores",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EnzoGabrielCode/culto-cores.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EnzoGabrielCode/culto-cores/issues"
+  },
+  "homepage": "https://github.com/EnzoGabrielCode/culto-cores#readme",
+  "description": "",
+  "dependencies": {
+    "resend": "^6.4.2"
+  }
+}

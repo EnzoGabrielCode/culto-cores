@@ -18,7 +18,7 @@ export default async function handler(request, response) {
       subject: "Sua Cor Sorteada!",
       html: `
         <h1>Olá!</h1>
-        <p>Aqui está a sua cor/versículo sorteado:</p>
+        <p>Aqui está a sua cor sorteada:</p>
         <img src="${imagemSorteada}" alt="Versículo Sorteado" style="width:100%; max-width:600px;" />
         <br>
         <p>Equipe Ativação Plus.</p>

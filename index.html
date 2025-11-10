@@ -20,12 +20,28 @@
     </header>
 
     <div class="container-principal">
+           
       <img src="assets/img/ativacao-branco.png" class="logo-branco" alt="" />
-      <button id="sortear-btn" class="botao-sortear">SORTEAR SUA COR</button>
 
+      <form id="sorteio-form" class="sorteio-form">
+        <p class="form-titulo">Digite seu e-mail para sortear sua cor!</p>
+        <input
+          type="email"
+          id="email-input"
+          placeholder="Seu melhor e-mail"
+          required
+        />
+        <button type="submit" id="sortear-btn" class="botao-sortear">
+          SORTEAR MINHA COR
+        </button>
+        <p id="form-mensagem"></p>
+      </form>
+
+           
       <div class="container-img">
-        <img id="versiculo-img" src="" alt="Versículo Sorteado" />
+                <img id="versiculo-img" src="" alt="Versículo Sorteado" />      
       </div>
+         
     </div>
 
     <div class="divisao"></div>

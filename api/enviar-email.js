@@ -21,7 +21,8 @@ export default async function handler(request, response) {
   try {
     const { data, error } = await resend.emails.send({
       // Mude para o seu e-mail verificado no Resend
-      from: "Seu Nome <email@seudominio.com>",
+      // Para isto:
+      from: "Ativação Plus <onboarding@resend.dev>",
       to: [emailUsuario], // O e-mail do usuário
       subject: "Sua Cor Sorteada!",
       // O corpo do e-mail em HTML

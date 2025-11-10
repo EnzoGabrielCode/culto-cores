@@ -1,14 +1,8 @@
-// api/enviar-email.js (O Backend)
-
-// Importa a biblioteca do Resend
 import { Resend } from "resend";
 
-// Pega sua Chave da API (que vamos salvar na Vercel)
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Esta é a função que a Vercel vai executar
 export default async function handler(request, response) {
-  // 1. Pega o e-mail e a imagem que o frontend enviou
   const { emailUsuario, imagemSorteada } = request.body;
 
   if (!emailUsuario || !imagemSorteada) {
@@ -17,15 +11,11 @@ export default async function handler(request, response) {
       .json({ error: "E-mail e imagem são obrigatórios." });
   }
 
-  // 2. Monta o e-mail
   try {
     const { data, error } = await resend.emails.send({
-      // Mude para o seu e-mail verificado no Resend
-      // Para isto:
-      from: "Ativação Plus <onboarding@resend.dev>",
-      to: [emailUsuario], // O e-mail do usuário
+      from: "Ativação Plus <contato@culto-cores.com.br>",
+      to: [emailUsuario],
       subject: "Sua Cor Sorteada!",
-      // O corpo do e-mail em HTML
       html: `
         <h1>Olá!</h1>
         <p>Aqui está a sua cor/versículo sorteado:</p>
@@ -40,7 +30,6 @@ export default async function handler(request, response) {
       return response.status(500).json({ error: "Erro ao enviar o e-mail." });
     }
 
-    // 3. Responde para o frontend que deu certo
     return response
       .status(200)
       .json({ message: "E-mail enviado com sucesso!" });

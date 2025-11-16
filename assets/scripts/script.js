@@ -9,14 +9,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function exibirSorteio(imagePath) {
     imgElement.src = imagePath;
-
     document.body.classList.remove("antes-sorteio");
     document.body.classList.add("depois-sorteio");
   }
 
   async function handleSorteioSubmit(evento) {
     evento.preventDefault();
-
     const email = emailInput.value;
 
     if (!email || !email.includes("@")) {
@@ -31,36 +29,28 @@ document.addEventListener("DOMContentLoaded", function () {
     formMensagem.className = "";
 
     try {
-      const randomNumber = Math.floor(Math.random() * 7) + 1;
-      const imagePath = `./assets/img/versiculos/${randomNumber}.png`;
-      const urlCompletaImagem = new URL(imagePath, window.location.href).href;
+      const response = await fetch("/api/sortear", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ emailUsuario: email }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Erro desconhecido");
+      }
+
+      const imagePath = data.imagePath;
 
       localStorage.setItem(chaveStorage, imagePath);
       console.log("Sorteio salvo no localStorage:", imagePath);
-
-      try {
-        await fetch("/api/enviar-email", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            emailUsuario: email,
-            imagemSorteada: urlCompletaImagem,
-          }),
-        });
-        console.log("E-mail enviado para a API com sucesso.");
-      } catch (emailError) {
-        console.error(
-          "Falha ao enviar o e-mail, mas o sorteio continua:",
-          emailError
-        );
-      }
-
       exibirSorteio(imagePath);
     } catch (error) {
       console.error("Erro no processo de sorteio:", error);
-      formMensagem.textContent = "Ops! Algo deu errado. Tente novamente.";
+      formMensagem.textContent = error.message;
       formMensagem.className = "erro";
       sortearBtn.disabled = false;
       sortearBtn.textContent = "SORTEAR MINHA COR";
@@ -68,7 +58,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   const imagemSalva = localStorage.getItem(chaveStorage);
-
   if (imagemSalva) {
     console.log("Usuário já sorteou. Exibindo imagem salva:", imagemSalva);
     exibirSorteio(imagemSalva);
